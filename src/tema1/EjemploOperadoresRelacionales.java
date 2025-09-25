@@ -15,7 +15,7 @@ public class EjemploOperadoresRelacionales {
         System.out.println("Resultado = " + (numero1 >= numero2)); //Mayor o igual
         System.out.println("Resultado = " + (numero1 <= numero2)); //Menor o igual
 
-        
+
 
     }
 }
