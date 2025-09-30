@@ -16,7 +16,7 @@ public class EjemploOperadoresAritmeticos {
         System.out.println("Resto de la division = " + (numero1 % numero2) );
 
         resultado = (numero1 * numero1) + (numero2 / numero1) - (numero2 * 22);
-        System.out.println("Resultado = " + resultado);
+        System.out.println("Resultado = "   + resultado);
 
 
 
