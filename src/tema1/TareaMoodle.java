@@ -232,7 +232,7 @@ public class TareaMoodle {
         int b3 = ((int)(Math.random() * 25) + 1) * 2;
         System.out.println(b3);
 
-        int c3 = (int)(Math.random() * 10) + 1;
+        double c3 = (Math.random() * 10) + 1;
         System.out.println(c3);
 
         int d3 = (int)(Math.random() * (-50 - (-150) + 1)) + (-150);

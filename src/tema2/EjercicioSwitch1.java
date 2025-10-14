@@ -11,8 +11,8 @@ public class EjercicioSwitch1 {
         //Menos de 30, 4000€ cuesta el bus
 
         int alumnos;
-        double costeTotal;
-        long costeAlm;
+        double costeTotal=0.0;
+        double costeAlm=0.0;
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Cuantos alumnos sois");
@@ -29,11 +29,12 @@ public class EjercicioSwitch1 {
             costeAlm = 95;
             costeTotal = costeAlm * alumnos;
         } else if (alumnos < 30) {
-            costeAlm = 4000;
-            costeTotal = costeAlm / alumnos;
+            costeTotal = 4000;
+            costeAlm = costeTotal / alumnos;
         }else {
             System.out.println("No hay viaje");
         }
+
         System.out.println("El coste del alumno es " + costeAlm);
         System.out.println("El coste del viaje es " + costeTotal);
 
