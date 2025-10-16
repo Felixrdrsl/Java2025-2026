@@ -19,6 +19,6 @@ public class EjercicioFicha2 {
                 System.out.println(numero1);
             }
             numero1++;
-
+        }
     }
 }
