@@ -7,7 +7,6 @@ public class EjercicioFicha2 {
 
         int numero1;
         int numero2;
-        int contador = numero1 = 0;
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Dime el primer numero");
@@ -17,9 +16,9 @@ public class EjercicioFicha2 {
 
         while (numero1 <= numero2) {
             if (numero1 % 2 == 0) {
-                System.out.println(contador);
+                System.out.println(numero1);
             }
-            contador++;
-        }
+            numero1++;
+
     }
 }
