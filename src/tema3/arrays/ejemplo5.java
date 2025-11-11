@@ -16,7 +16,7 @@ public class ejemplo5 {
         }
 
         /**
-         * Función que imprime un array de enteros
+         * Función que imprime un array de doubles
          * @param array
          */
         public static void imprimirArray(double[] array) {
