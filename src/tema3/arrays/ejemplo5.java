@@ -1,6 +1,5 @@
 package tema3.arrays;
 
-import static tema3.arrays.ejemplo4.imprimirArray;
 
 public class ejemplo5 {
 
