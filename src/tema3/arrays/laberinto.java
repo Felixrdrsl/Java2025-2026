@@ -38,8 +38,9 @@ public class laberinto {
 
 
 
-    public static void pintarTablero(char [][] m, int nun){
-        int i , j;
+    public static void pintarTablero(char [][] m, int i, int j){
+        i = 0;
+        j = 0;
 
         for (i = 0; i < m.length; i++){
             for (j = 0; j<m[i].length; j++){
@@ -54,29 +55,6 @@ public class laberinto {
             }
 
             System.out.println();
-        }
-        nun = (int) Math.random() * 3;
-        switch (nun) {
-            case 0:
-                i = 0;
-                j = (int) Math.random() * 19;
-                System.out.println(m[i][j] = '@');
-                break;
-            case 1:
-                i = 19;
-                j = (int) Math.random() * 19;
-                System.out.println(m[i][j] = '@');
-                break;
-            case 2:
-                i = (int) Math.random() * 19;
-                j = 0;
-                System.out.println(m[i][j] = '@');
-                break;
-            case 3:
-                i = (int) Math.random() * 19;
-                j = 19;
-                System.out.println(m[i][j] = '@');
-                break;
         }
 
 
@@ -98,11 +76,37 @@ public class laberinto {
         char [][] tablero = new char[20][20];
         int nun = 0;
         int opcion = -1;
+        int i=0;
+        int j= 0;
+
+        nun = (int) (Math.random() * 3) + 1;
+        System.out.println(nun);
+        switch (nun) {
+            case 1:
+                i = 0;
+                j = (int) (Math.random() * 19) + 1;
+                break;
+            case 2:
+                i = 19;
+                j = (int) (Math.random() * 19) + 1;
+                break;
+            case 3:
+                i = (int) (Math.random() * 19) + 1;
+                j = 0;
+                break;
+            case 4:
+                i = (int) (Math.random() * 19) + 1;
+                j = 19;
+                break;
+        }
+
+        tablero[i][j] = '@';
 
 
 
-        pintarTablero(tablero, nun);
+        pintarTablero(tablero,i,j);
         pintarMenu();
+
 
 
 
