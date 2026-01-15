@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public class CuentaBancaria {
 
-    //Propiedad Static
+
+
+    //Propiedades static
     private static Integer totalCuentas = 0;
-    private static Double tasaInteres = 0.03; //Aplicar a todas las cuentas
-    private static final String nombreBanco = "Banco Cuevas Antas - BCA";
+    private static Double tasaInteres = 0.02; //Aplicar a todas las cuentas
+    private static final String nombreBanco = "BCA";
 
     //Propiedades no static
     private String idCuenta;
@@ -15,9 +17,8 @@ public class CuentaBancaria {
     private String titular;
 
     //Constructores
-
     public CuentaBancaria(Double saldo, String titular) {
-        CuentaBancaria.totalCuentas++; //Al crear un objeto se incrementa
+        CuentaBancaria.totalCuentas++; //Al crear objeto nuevo se incrementa
         this.idCuenta = CuentaBancaria.generarNumeroCuenta();
         this.saldo = saldo;
         this.titular = titular;
@@ -30,13 +31,14 @@ public class CuentaBancaria {
         this.saldo = 0.0;
     }
 
-    public CuentaBancaria(CuentaBancaria otra){
+    public CuentaBancaria(CuentaBancaria otra) {
         CuentaBancaria.totalCuentas++;
-        idCuenta = otra.idCuenta;
-        saldo = otra.saldo;
-        titular = otra.titular;
+        this.idCuenta = CuentaBancaria.generarNumeroCuenta(); //BCA-00000<num>
+        this.saldo = otra.saldo;
+        this.titular = otra.titular;
     }
 
+    //Getters y Setters
     public String getIdCuenta() {
         return idCuenta;
     }
@@ -64,7 +66,7 @@ public class CuentaBancaria {
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("CuentaBancaria{");
-        sb.append("idCuenta=").append(idCuenta);
+        sb.append("idCuenta='").append(idCuenta).append('\'');
         sb.append(", saldo=").append(saldo);
         sb.append(", titular='").append(titular).append('\'');
         sb.append('}');
@@ -83,46 +85,64 @@ public class CuentaBancaria {
         return Objects.hashCode(idCuenta);
     }
 
-    //Metodos Static
-
+    //MÉTODOS STATIC
     /**
-     * Metodo privado para generar el nuemero de cuenta en los constructores
+     * Metodo privado para generar el número de cuenta en los constructores
      * @return
      */
     private static String generarNumeroCuenta(){
-        return CuentaBancaria.nombreBanco + "-" + String.format("%06d",CuentaBancaria.totalCuentas);
+        return CuentaBancaria.nombreBanco + "-"
+                + String.format("%06d", CuentaBancaria.totalCuentas);
     }
 
-    //Metodos no static
-
-    /**
-     * Incrementa el saldo de la cuenta, si la cantidad es positiva
-     * @param canidad
-     * @return true si la cantidad es positiva, false en caso contrario
-     */
-    public boolean depositar (Double canidad){
-        if (canidad>0) {
-            this.saldo += canidad;
-            return true;
-        }
-        return false;
-    }
-
-    public static Integer getTotalCuentas(){
+    public static Integer getTotalCuentas() {
         return CuentaBancaria.totalCuentas;
     }
 
+    public static Double getTasaInteres() {
+        return CuentaBancaria.tasaInteres;
+    }
+
+    public static void setTasaInteres(Double tasaInteres) {
+        CuentaBancaria.tasaInteres = tasaInteres;
+    }
+
+    //MÉTODOS NO STATIC
     /**
-     * Decrementa el saldo
+     * Incrementa el saldo de la cuenta, si la cantidad es positiva
      * @param cantidad
-     * @return true si se puede retirar, false en caso contrario
+     * @return true si la cantidad es positiva, false en caso contrario
      */
-    public boolean retirar(Double cantidad) {
-        if (cantidad <= this.saldo && cantidad > 0) {
+    public boolean depositar(Double cantidad){
+        if (cantidad > 0) {
             this.saldo += cantidad;
             return true;
         }
+
         return false;
+    }
+
+    /**
+     * Decrementa el saldo en la cantidad indicada, si la cantidad es positiva y hay saldo suficiente
+     * @param cantidad
+     * @return true si se puede retirar, false en caso contrario
+     */
+    public boolean retirar(Double cantidad){
+        if (cantidad <= this.saldo && cantidad > 0) {
+            this.saldo -= cantidad;
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Calcula el beneficio de la cuenta en función del saldo y el tipo de interés remunerado
+     * que el banco ofrece a TODAS las cuentas
+     * @return
+     */
+    public Double calcularBeneficio() {
+        return this.saldo * CuentaBancaria.tasaInteres;
     }
 
 
