@@ -34,7 +34,7 @@ public class tienda {
     public boolean alquilarJuego(String titulo, String plataforma) {
         //Buscar el juego en la tienda
         for(VideoJuego v: this.videojuegos) {
-            if (v.getTitulo().equals(titulo) && v.getPlataforma().equals(plataforma)) {
+            if (v.getTitulo()   .equals(titulo) && v.getPlataforma().equals(plataforma)) {
                 return v.alquilar();
             }
         }
