@@ -94,4 +94,5 @@ public class Series implements Entregable {
     public Boolean esPrestado() {
         return prestado;
     }
+
 }
