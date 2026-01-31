@@ -46,10 +46,8 @@ public class Prueba {
         return sb.toString();
     }
 
-    public void resolver(Hechizo hechizo){
-        //if (hechizo.getPotencia() > nivelDificultad){}
-
-
+    public boolean resolver(int potenciaHechizo){
+        return potenciaHechizo >= nivelDificultad;
     }
 
 }

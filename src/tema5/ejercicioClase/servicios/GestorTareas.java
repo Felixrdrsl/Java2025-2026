@@ -98,7 +98,10 @@ public class GestorTareas {
 
 
     public void listarTareasPendientes(){
-
+        IO.println("Las tareas pendientes del usuario son: " + nombreUsuario);
+        for (Tarea tarea: getTareasPendientes()){
+            IO.println(tarea);
+        }
     }
 
 

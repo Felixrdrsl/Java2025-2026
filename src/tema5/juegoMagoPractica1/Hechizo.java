@@ -46,8 +46,8 @@ public class Hechizo {
         return sb.toString();
     }
 
-    public void esEfectivo(Prueba prueba){
-
+    public boolean esEfectivo(Prueba prueba){
+         return this.potencia >= prueba.getNivelDificultad();
     }
 
 }

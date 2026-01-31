@@ -50,12 +50,43 @@ public class Mago {
         return sb.toString();
     }
     public void aprenderHechizo(Hechizo hechizo){
+
         this.hechizos.add(hechizo);
+        IO.println("Has aprendido el hechizo: " + hechizo.getNombre());
     }
     public void lanzarHechizo(String nombreHechizo,Prueba prueba ){
-        //Consume energía y usa el hechizo si está en la lista. Si
-        //el hechizo supera la prueba, devuelve un éxito. Si no, pierde energía adicional.
+        Hechizo hechizo = null;
+        for (Hechizo hechizo1: hechizos){
+            if (hechizo1.getNombre().equalsIgnoreCase(nombreHechizo)){
+                hechizo = hechizo1; break;
+            }
+        }
+        if (hechizo == null){
+            IO.println("El hechizo " + nombreHechizo + " no lo has aprendido");
+            return;
+        }
+        if (energia < hechizo.getEnergiaNecesaria()){
+            IO.println("No tienes la energia necesaria");
+            return;
+        }
 
+        //Echale un vistazo a esto porque me sale a veces negativo y no se si es por el orden
+        //o porque he hecho yo otra cosa mal
+        energia -= hechizo.getEnergiaNecesaria();
+        IO.println("Lanzar " + nombreHechizo + " Energia restante: " + energia);
+
+        if (hechizo.esEfectivo(prueba)){
+            energia += prueba.getRecompensa();
+            IO.println("Has superado la prueba " + prueba.getRecompensa() + " de energia ganada");
+        } else {
+            energia -= prueba.getNivelDificultad();
+            IO.println("No has superado la prueba, necesitas un hechizo de mayor potencia: Nivel minimo de potencia = "
+                    + prueba.getNivelDificultad());
+            IO.println("Niveles de los hechizos aprendidos = " + getHechizos());
+        }
+        if (energia <= 0) {
+            IO.println("Te has quedado sin energía");
+        }
     }
     public Hechizo buscar(String nombreHechizo){
         for (Hechizo hechizo: hechizos){
@@ -65,9 +96,13 @@ public class Mago {
         }
         return null;
     }
-    public void recargarEnergia(int cantidad){
 
+    public void recargarEnergia(int cantidad){
+        this.energia = Math.min(energia + cantidad, 100);
+        IO.println("Energia: " + energia);
     }
+
+
 
 
 }
