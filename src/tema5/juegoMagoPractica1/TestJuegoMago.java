@@ -20,7 +20,9 @@ public class TestJuegoMago {
         Prueba derrotarOrco = new Prueba("Derrotar a un orco",8, 15);
         Prueba derrotarElfo = new Prueba("derrotar al elfo de nivel 15",10, 20);
 
+        System.out.println("Energia del mago " + mago1.getEnergia());
         mago1.lanzarHechizo("Bola de fuego",romperMuro);
+        System.out.println("Energia del mago " + mago1.getEnergia());
 
         mago1.aprenderHechizo(hechizo2);
         System.out.println("Energia del mago " + mago1.getEnergia());

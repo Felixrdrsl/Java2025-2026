@@ -55,21 +55,17 @@ public class Mago {
         IO.println("Has aprendido el hechizo: " + hechizo.getNombre());
     }
     public void lanzarHechizo(String nombreHechizo,Prueba prueba ){
-        Hechizo hechizo = null;
-        for (Hechizo hechizo1: hechizos){
-            if (hechizo1.getNombre().equalsIgnoreCase(nombreHechizo)){
-                hechizo = hechizo1; break;
-            }
-        }
-        if (hechizo == null){
+        Hechizo hechizoUtilizado = buscar(nombreHechizo);
+
+        if (hechizoUtilizado == null){
             IO.println("El hechizo " + nombreHechizo + " no lo has aprendido");
             return;
         }
-        if (energia < hechizo.getEnergiaNecesaria()){
+        if (energia < hechizoUtilizado.getEnergiaNecesaria()){
             IO.println("No tienes la energia necesaria");
             return;
         }
-        if (hechizo.esEfectivo(prueba)){
+        if (hechizoUtilizado.esEfectivo(prueba)){
             energia += prueba.getRecompensa();
             IO.println("Has superado la prueba " + prueba.getRecompensa() + " de energia ganada");
         } else {
@@ -78,17 +74,13 @@ public class Mago {
                     + prueba.getNivelDificultad());
             IO.println("Niveles de los hechizos aprendidos = " + getHechizos());
         }
+        energia -= hechizoUtilizado.getEnergiaNecesaria();
+        IO.println("Lanzar " + nombreHechizo + " Energia restante: " + energia);
 
-        //He intentado poner este metodo como para avisar que no tiene energia
-        //Pero al no tener energia suficiente no soy capaz de hacer que pierda lo que tiene porque no lo usa,
-        //entonces me he quedado sin ideas de como solucionar eso.
         if (energia <= 0) {
+            energia = 0;
             IO.println("Te has quedado sin energía");
         }
-        //Echale un vistazo a esto porque me sale a veces negativo y no se si es por el orden
-        //o porque he hecho yo otra cosa mal
-        energia -= hechizo.getEnergiaNecesaria();
-        IO.println("Lanzar " + nombreHechizo + " Energia restante: " + energia);
     }
     public Hechizo buscar(String nombreHechizo){
         for (Hechizo hechizo: hechizos){

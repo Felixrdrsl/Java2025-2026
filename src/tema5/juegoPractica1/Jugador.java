@@ -1,5 +1,9 @@
 package tema5.juegoPractica1;
 
+import tema5.juegoMagoPractica1.Mago;
+
+import javax.swing.*;
+
 public class Jugador {
 
     //nombre
@@ -14,15 +18,15 @@ public class Jugador {
     private TipoPersonaje tipo;
     private Integer nivel;
     private Integer experiencia;
-    private Integer salud;
-    private Arma Arma_Derecha;
-    private Arma Arma_Izquierda;
+    private Double salud;
+    private Arma arma_Derecha;
+    private Arma arma_Izquierda;
 
     public Jugador(String nombre, TipoPersonaje tipo) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.nivel = 1;
-        this.salud = 200;
+        this.salud = 200.0;
         this.experiencia = 0;
     }
 
@@ -50,11 +54,11 @@ public class Jugador {
         this.nivel = nivel;
     }
 
-    public Integer getSalud() {
+    public Double getSalud() {
         return salud;
     }
 
-    public void setSalud(Integer salud) {
+    public void setSalud(Double salud) {
         this.salud = salud;
     }
 
@@ -67,19 +71,19 @@ public class Jugador {
     }
 
     public Arma getArma_Derecha() {
-        return Arma_Derecha;
+        return arma_Derecha;
     }
 
     public void setArma_Derecha(Arma arma_Derecha) {
-        Arma_Derecha = arma_Derecha;
+        arma_Derecha = arma_Derecha;
     }
 
     public Arma getArma_Izquierda() {
-        return Arma_Izquierda;
+        return arma_Izquierda;
     }
 
     public void setArma_Izquierda(Arma arma_Izquierda) {
-        Arma_Izquierda = arma_Izquierda;
+        arma_Izquierda = arma_Izquierda;
     }
 
     @Override
@@ -90,9 +94,72 @@ public class Jugador {
         sb.append(", nivel=").append(nivel);
         sb.append(", experiencia=").append(experiencia);
         sb.append(", salud=").append(salud);
-        sb.append(", Arma_Derecha=").append(Arma_Derecha);
-        sb.append(", Arma_Izquierda=").append(Arma_Izquierda);
+        sb.append(", Arma_Derecha=").append(arma_Derecha);
+        sb.append(", Arma_Izquierda=").append(arma_Izquierda);
         sb.append('}');
         return sb.toString();
     }
+
+    public void subirNivel(){
+        if (nivel < 10 ){
+            nivel++;
+            salud += Math.pow(2.5, nivel);
+        }
+    }
+    public boolean equiparArma(Arma arma){
+        if (arma.getDosManos()){
+            if (arma_Derecha == null && arma_Izquierda == null){
+                arma_Derecha = arma;
+                arma_Izquierda = arma;
+                return true;
+            }
+        }
+        if (arma_Derecha == null){
+            arma_Derecha = arma;
+            return true;
+        }
+        if (arma_Izquierda == null){
+            arma_Izquierda = arma;
+            return true;
+        }
+        return false;
+    }
+    public void tomarPocion(int puntosS){
+        salud += puntosS;
+        if (salud > 10000.0){
+            salud = 10000.0;
+        }
+    }
+    public boolean reducirVida(int puntosD){
+        salud -= puntosD;
+        if (salud < 0.0){
+            salud = 0.0;
+            return true; //Si devuelve true es que está muerto
+        }
+        return false;
+    }
+    public void golpearMonstruo(Monstruo monstruo){
+        if (this.getArma_Derecha() != null) {
+            monstruo.reducirVida(this.getArma_Derecha().getPuntosD());
+            if (!this.getArma_Derecha().getDosManos()) {
+                if (this.getArma_Izquierda() != null) {
+                    monstruo.reducirVida(this.getArma_Izquierda().getPuntosD());
+                }
+            }
+        }
+        //Comprobar si has mata al monstruo
+
+        if (monstruo.getSalud() <= 0){
+            experiencia += 10 * monstruo.getNivel();
+
+            if (experiencia > 1000){
+                experiencia = 1000;
+            }
+        }
+
+    }
+
+
+
+
 }
