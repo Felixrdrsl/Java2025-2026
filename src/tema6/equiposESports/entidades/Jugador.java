@@ -63,7 +63,7 @@ public abstract class Jugador {
     }
 
     public void addPuntos(Integer puntos){
-        puntos += getPuntos();
+        this.puntos += puntos;
 
     }
     public abstract void imprimirRol();

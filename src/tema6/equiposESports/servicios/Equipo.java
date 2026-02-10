@@ -55,11 +55,12 @@ public class Equipo {
     public void nuevoJugador(Jugador jugador){
         jugadores.add(jugador);
     }
-    public Integer calcularPuntos(Integer totalPuntos){
+    public Integer calcularPuntos(){
+        Integer total = 0;
         for (Jugador jugador: jugadores){
-            totalPuntos += jugador.getPuntos();
+            total += jugador.getPuntos();
         }
-        return totalPuntos;
+        return total;
     }
     public void listaJugadores() {
         IO.println("Lista de jugadores" + getJugadores());
@@ -72,11 +73,9 @@ public class Equipo {
         for(Jugador j : this.jugadores) {
             if (j.getId().equals(id)){
                 return j;
-            } else {
-                IO.println("No se ha encontrado el jugador");
             }
-
         }
+        IO.println("Jugador no encontrado");
         return null;
     }
 
