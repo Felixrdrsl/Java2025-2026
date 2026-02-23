@@ -15,7 +15,7 @@ public class App {
         Sesion ses3 = new Sesion(LocalTime.of(15,0),LocalTime.of(17,0));
 
         Examen ex1 = new Examen("Matematicas",
-                LocalDate.of(2025,12,15),LocalTime.of(10,0));
+                LocalDateTime.of(2025,12,15),LocalTime.of(10,0));
         Examen ex2 = new Examen();
 
 
