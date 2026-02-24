@@ -3,8 +3,8 @@ package tema7.PilaNumerica;
 public class Pila {
     static void main() {
 
-        PilaNumerica pila1 = new PilaNumerica();
-        PilaNumerica pila2 = new PilaNumerica();
+        PilaNumerica<Integer> pila1 = new PilaNumerica();
+        PilaNumerica<Double> pila2 = new PilaNumerica();
 
         pila1.apilar(1);
         pila1.apilar(2);

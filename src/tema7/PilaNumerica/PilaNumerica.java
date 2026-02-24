@@ -32,7 +32,7 @@ public class PilaNumerica<T extends Number>{
         pilaNumerica.addLast(numero);
     }
     public T desapilar(){
-        return pilaNumerica.remove(pilaNumerica.size()-1);
+        return pilaNumerica.removeLast();
     }
     public Double suma(){
         Double total = 0.0;
