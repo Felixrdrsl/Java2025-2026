@@ -9,6 +9,7 @@ public class App {
         cola.insertar(new Notificacion("Jugar online", 3.0));
         cola.pintar();
         IO.println(cola.sacar());
+
         cola.pintar();
 
 

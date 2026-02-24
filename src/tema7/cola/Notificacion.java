@@ -36,6 +36,7 @@ public class Notificacion implements Notificable {
 
     @Override
     public void notificar() {
-        IO.println(this.mensaje + " - " + this.prioridad);
+        IO.println(this.mensaje + " - " +
+                this.prioridad);
     }
 }

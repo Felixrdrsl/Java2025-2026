@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+
 public class EjemploArrayList {
     static void pintar(List<Persona> listaPersonas) {
         for(Persona p: listaPersonas)

@@ -32,6 +32,8 @@ public class EjemploLinkedList {
             IO.print(n + " ");
         IO.println();
 
+
+
         //Añadir una sublista
         numeros.addAll(List.of(9,10,11));
         for(Integer n: numeros)

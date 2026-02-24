@@ -23,6 +23,8 @@ public class ColaMensaje<T extends Notificable> {
      * Sacamos del principio de la cola
      * @return
      */
+
+
     public T sacar() {
         return mensajes.removeFirst();
     }
