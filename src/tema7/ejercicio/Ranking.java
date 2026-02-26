@@ -2,11 +2,12 @@ package tema7.ejercicio;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class Ranking {
 
     private final Set<Jugador> jugadores = new HashSet<>();
-    private final Set<Jugador> ranking = new HashSet<>();
+    private final Set<Jugador> ranking = new TreeSet<>();
 
 
     public Set<Jugador> getJugadores() {
