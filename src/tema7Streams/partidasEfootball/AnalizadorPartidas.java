@@ -71,6 +71,8 @@ public class AnalizadorPartidas {
         IO.println("------------------------------------------------------------");
         //Consulta 3: Goles totales marcados
         //Suma de todos los golesLocal.
+        int total = partidas.stream()
+                .mapToInt(p-> p.getGolesLocal())
 
 
 
