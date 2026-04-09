@@ -1,8 +1,7 @@
 package tema7Streams.partidasEfootball;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AnalizadorPartidas {
@@ -32,7 +31,8 @@ public class AnalizadorPartidas {
                 2, 3, "12min",
                 LocalDateTime.of(2026, 04, 05, 11, 00), 75));
 
-        partidas.add(new Partida(7, "Javi_Killer", "CPU_Manchester", "IA", "Manchester_City", 5, 0, "12min", LocalDateTime.of(2026, 04, 05, 18, 20), 250));
+        partidas.add(new Partida(7, "Javi_Killer", "CPU_Manchester", "IA", "Manchester_City",
+                5, 0, "12min", LocalDateTime.of(2026, 04, 05, 18, 20), 250));
 
         partidas.add(new Partida(8, "Sofia_V", "CPU_Turin", "Liga", "Juventus",
                 1, 1, "20min",
@@ -72,9 +72,12 @@ public class AnalizadorPartidas {
         //Consulta 3: Goles totales marcados
         //Suma de todos los golesLocal.
         int total = partidas.stream()
-                .mapToInt(p-> p.getGolesLocal())
-
-
+                .mapToInt(Partida::getGolesLocal)
+                .sum();
+        total += partidas.stream()
+                .mapToInt(Partida::getGolesVisitante)
+                .sum();
+        IO.println(total);
 
 
 
@@ -82,17 +85,36 @@ public class AnalizadorPartidas {
         IO.println("------------------------------------------------------------");
         //Consulta 4: Mejor rival derrotado
         //Encontrar la partida ganada con mas estrellas.
+        Optional<Partida> mejorPartida = partidas.stream()
+                .filter(p -> p.getGolesLocal() > p.getGolesVisitante() )
+                .max(Comparator.comparing(Partida::getEstrellasGanadas));
+        IO.println(mejorPartida);
+
 
 
         IO.println("------------------------------------------------------------");
         //Consulta 5: Media de estrellas por modo
         //Calcular averagingInt(estrellasGanadas) por modoJuego.
         //text Estrellas medias por modo: PvP: 112★ Liga: 98★ Evento: 85★
+        Map<String, Double> mediaPartida = partidas.stream()
+                        .collect(Collectors.groupingBy(Partida::getModoJuego,
+                                Collectors.averagingInt(Partida::getEstrellasGanadas)));
+        IO.println(mediaPartida);
+
 
 
         IO.println("------------------------------------------------------------");
         //Consulta 6: Partidas de más de 20 minutos
         //Filtrar duracion que contenga "20min" o "30min".
+        List<Partida> duracionPartida = partidas.stream()
+                        .filter(p -> p.getDuracion().contains("20min")
+                                || p.getDuracion().contains("30min"))
+                        .toList();
+
+        for (Partida partida: duracionPartida){
+            IO.println(partida);
+        }
+
 
 
         IO.println("------------------------------------------------------------");
@@ -100,9 +122,18 @@ public class AnalizadorPartidas {
         //Los 5 equiposLocal con más apariciones.
         //text Equipos más jugados: FC_Barcelona → 12 veces Real_Madrid → 9 veces Manchester → 7 veces
 
+
+
         IO.println("------------------------------------------------------------");
         //Consulta 8: Peor racha (3+ derrotas seguidas)
         //Partidas perdidas ordenadas por fecha (golesLocal < golesVisitante).
+        List<Partida> derrotas = partidas.stream()
+                .filter(p-> p.getGolesLocal() < p.getGolesVisitante())
+                .toList();
+        for (Partida partida: derrotas){
+            IO.println(partida);
+        }
+
 
 
         IO.println("------------------------------------------------------------");
